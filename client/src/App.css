@@ -28,6 +28,108 @@
   color: #61dafb;
 }
 
+.appName{
+  color: rgb(128, 45, 45)
+}
+.lists{
+  list-style-type: none;
+  padding: 0;
+  height: fit-content;
+  width: fit-content;
+  margin: 0;
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+ 
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 12px; 
+  color: black;
+  display: block; 
+}
+.container{
+  border: 2px solid #111010;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+
+}
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+.reqList{
+  list-style-type: none;
+  padding: 0;
+  height: auto;
+  width: auto;
+  margin: 0;
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+ 
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 12px; 
+  color: black;
+  display: block; 
+}
+
+.btn{
+  width: fit-content;
+}
+
+.profilePic{
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.btnText{
+  width: 1;
+}
+.box{
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 16px;
+
+  overflow-y: auto;
+  max-height: 500px;
+}
+.fox{
+  border: 5px solid #111010;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 16px;
+
+}
+.bottomStuff{
+
+bottom: 0px;
+position: relative;
+
+
+}
+.tag{
+  color: blue;
+}
+body {
+  background-color: rgb(227, 224, 235);
+
+}
+.textBox{
+position: fixed;
+  bottom: 0px;
+  border: 2px solid #111010;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

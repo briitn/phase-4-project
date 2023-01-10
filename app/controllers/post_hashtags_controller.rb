@@ -1,0 +1,3 @@
+class PostHashtagsController < ApplicationController
+    
+end
