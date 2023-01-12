@@ -21,8 +21,7 @@ def destroy
   user=User.find(session[:user_id])
   user.posts.destroy_all
   user.destroy
-  posts=Post.all
-  render json: posts
+
 
 end
 def update
