@@ -15,13 +15,13 @@ function App() {
   const [id, setId]=useState('')
   const [tagName, setTagName]=useState()
   const holdTagPosts=[]
-  useEffect(()=>{
+  if (userStuff===undefined){
     fetch("http://localhost:3000/home")
     .then(res=>res.json())
     .then(res=>{
       setUsername(res.username)
       setId(res.id)
-      setUserStuff([res])})},[])
+      setUserStuff([res])})}
  
 
   const [allUsers, setAllUsers]=useState([])
@@ -32,7 +32,7 @@ function App() {
       
       },[]
       )
-      console.log(tagId)
+  
   return (
    <BrowserRouter>
    <Switch>
