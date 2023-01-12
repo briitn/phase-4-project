@@ -10,7 +10,7 @@ session[:post_id]=post.id
 render json: post
     end
 
-
+j
 
     private
 
