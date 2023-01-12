@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react"
 
-function Hashtags({id, tagName, postArray, setPostArray}){
+
+function Hashtags({ tagName, postArray, setPostArray}){
    
 
 if (postArray===undefined){
 
 
-    fetch('http://localhost:3000/hashtags/')
+    fetch('http://localhost:3000/hashtags')
     .then(res=>res.json())
-    .then(res=>{console.log(res)
+    .then(res=>{
         setPostArray(res)})
 }
 
-console.log(postArray)
+
 const mapPostArray=postArray?.map(item=>{
-   console.log(item.hashtags[0].name)
+ 
     return (
         <div key={item.id} className="container">
 <img src={item.user.image_url} className='profilePic'/>
