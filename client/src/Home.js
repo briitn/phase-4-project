@@ -22,8 +22,8 @@ useEffect(()=>{
 useEffect(()=>{
     fetch("http://localhost:3000/posts")
 .then(res=>res.json())
-.then(res=>{  setBarks(res.slice(-20))
-  console.log(res)
+.then(res=>{  setBarks(res)
+
     })
 }, [userStuff])
 function changeProfilePic(e){
