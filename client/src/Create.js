@@ -1,7 +1,7 @@
 import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory} from "react-router-dom"
-function Create({ setUsername}){
+function Create(){
   const[newUsername, setNewUsername]=useState()
     const [imageUrl, setImageUrl]=useState('')
     const [password, setPassword]=useState('')
@@ -36,7 +36,7 @@ function Create({ setUsername}){
     function changePass(e){
 
         setPassword(e.target.value)
-console.log(password)
+
     }
 
     function changeUser(e){

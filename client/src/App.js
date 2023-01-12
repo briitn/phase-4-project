@@ -32,7 +32,7 @@ function App() {
       <Login  setUserStuff= {setUserStuff}/>
     </Route>
     <Route exact path='/create'>
-      <Create username={username} setUsername={setUsername}/>
+      <Create setUsername={setUsername}/>
     </Route>
     <Route exact path='/home'>
 <Home userStuff={userStuff} setUserStuff={setUserStuff} 
