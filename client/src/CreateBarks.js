@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
- function CreateTweets({ id, barks,
+ function CreateBarks({ id, barks,
 setBarks}){
 
     const [refresh, setRefresh]=useState(false)
@@ -85,4 +85,4 @@ return (<div className="textBox">
 
 
 
- export default CreateTweets
+ export default CreateBarks

@@ -2,7 +2,7 @@
 import {Fragment, useEffect, useState} from 'react'
 
 import { useHistory } from 'react-router-dom'
- import CreateTweets from './CreateTweets'
+ import CreateBarks from './CreateBarks'
 
 function Home({userStuff, setUserStuff, id, setTagId, holdTagPosts,setTagName, tagId, setPostArray}){
 
@@ -139,7 +139,7 @@ console.log(filterBarks)
       
    {mapBarks}
     
-    <CreateTweets id={id} allowBark={allowBark} setAllowBark={setAllowBark} barks={barks}
+    <CreateBarks id={id} allowBark={allowBark} setAllowBark={setAllowBark} barks={barks}
     setBarks={setBarks} />
    </div>
 

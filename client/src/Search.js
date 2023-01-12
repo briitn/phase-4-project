@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import Friends from './Friends'
-import Messages from './CreateTweets'
+import Messages from './CreateBarks'
 function Search({currentUser, userStuff, setId, id, friendArray, allUsers}){
   
     const [username, setUsername]=useState('')
