@@ -35,8 +35,7 @@ function App() {
       <Create username={username} setUsername={setUsername}/>
     </Route>
     <Route exact path='/home'>
-<Home userStuff={userStuff} setUserStuff={setUserStuff} currentUser={username} setCurrentUser={setUsername}
- id={id} setId={setId}
+<Home userStuff={userStuff} setUserStuff={setUserStuff} 
  setTagId={setTagId} holdTagPosts={holdTagPosts} tagId={tagId} setTagName={setTagName} setPostArray={setPostArray}
  />
     </Route>
