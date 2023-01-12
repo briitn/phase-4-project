@@ -63,7 +63,7 @@ function changeUsername(e){
 
 const [editPic, setEditPic]=useState(false)
     const mapUserStuff=userStuff?.map(item=>{
-     console.log(item)
+   
         return(
             <div key={item.id}>
                 <img className='profilePic'src={item.image_url}/>
