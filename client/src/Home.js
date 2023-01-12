@@ -1,6 +1,6 @@
 
 import {Fragment, useEffect, useState} from 'react'
-import { Redirect } from 'react-router-dom'
+
 import { useHistory } from 'react-router-dom'
  import CreateTweets from './CreateTweets'
 
