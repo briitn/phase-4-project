@@ -11,7 +11,7 @@ class HashtagsController < ApplicationController
          post=Post.find_by(id: session[:post_id])
 post.hashtags.create(name: params[:name])
 
-
+h
 render json: post
       end
     end
