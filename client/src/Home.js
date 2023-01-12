@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
  import CreateTweets from './CreateTweets'
 
-function Home({userStuff, setUserStuff,setCurrentUser, id,  allUsers,setTagId, holdTagPosts,setTagName, tagId, setPostArray}){
+function Home({userStuff, setUserStuff,setCurrentUser, id, setTagId, holdTagPosts,setTagName, tagId, setPostArray}){
 
 const [allowBark, setAllowBark]=useState(false)
 const [barks, setBarks]=useState()

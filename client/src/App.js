@@ -24,15 +24,6 @@ function App() {
       setUserStuff([res])})}
  
 
-  const [allUsers, setAllUsers]=useState([])
-    useEffect(()=>{
-        fetch("http://localhost:3000/users")
-        .then(res=>res.json())
-      .then(res=>{setAllUsers(res)})
-      
-      },[]
-      )
-  
   return (
    <BrowserRouter>
    <Switch>
@@ -46,7 +37,7 @@ function App() {
     <Route exact path='/home'>
 <Home userStuff={userStuff} setUserStuff={setUserStuff} currentUser={username} setCurrentUser={setUsername}
  id={id} setId={setId}
- allUsers={allUsers} setTagId={setTagId} holdTagPosts={holdTagPosts} tagId={tagId} setTagName={setTagName} setPostArray={setPostArray}
+ setTagId={setTagId} holdTagPosts={holdTagPosts} tagId={tagId} setTagName={setTagName} setPostArray={setPostArray}
  />
     </Route>
  <Route exact path='/hashtags'>
