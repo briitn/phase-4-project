@@ -143,7 +143,7 @@ console.log(filterBarks)
     setBarks={setBarks} />
    </div>
 
-<p onClick={(e)=>{
+<button onClick={(e)=>{
    
     if (window.confirm("Are you sure you want to logout?")){
     fetch("http://localhost:3000/logout",
@@ -151,9 +151,9 @@ console.log(filterBarks)
         method: "DELETE"
     })
    history.push('/')}
-}}>Logout</p>
+}}>Logout</button>
 
-  <p onClick={(e)=>{
+  <button onClick={(e)=>{
    
     if( window.confirm("Are you sure you want to delete your account?")){
     fetch(`http://localhost:3000/users/`,
@@ -161,7 +161,7 @@ console.log(filterBarks)
         method: "DELETE"
     })
    history.push('/')}
-}}>Delete Account</p>
+}}>Delete Account</button>
     
        </Fragment>
     )
