@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 function Hashtags({id, tagName, postArray, setPostArray}){
-    console.log(postArray)
+   
 
 if (postArray===undefined){
 

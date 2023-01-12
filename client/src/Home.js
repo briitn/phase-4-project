@@ -34,7 +34,7 @@ body:  JSON.stringify(
 .then(res=>{  setUserStuff([res])
 })}
 
-console.log(userStuff)
+
 function changeUsername(e){
     e.preventDefault()
     fetch(`http://localhost:3000/users/`,{
