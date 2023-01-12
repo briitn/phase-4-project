@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
             render json: {errors: ["Invalid username or password"]}, status: :unauthorized
         end
     end
-
+h
     def show
 tag= Hashtag.find(params[:id])
 session[:hashtag_id]= tag.id
