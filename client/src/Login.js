@@ -48,7 +48,7 @@ function Login({setUserStuff}){
     function changeUser(e){
 
         setUsername(e.target.value)
-        console.log(username)
+      
     }
     return (
         <div className='fox'>
