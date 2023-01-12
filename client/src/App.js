@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 import {Route, Switch} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Create from './Create';
 import Home from './Home'
 import Hashtags from './Hashtags';
@@ -12,7 +12,7 @@ function App() {
   const [tagId, setTagId]=useState('')
   const [username, setUsername]=useState('')
   const [userStuff, setUserStuff]=useState()
-  const [id, setId]=useState('')
+
   const [tagName, setTagName]=useState()
   const holdTagPosts=[]
   if (userStuff===undefined){
@@ -20,7 +20,7 @@ function App() {
     .then(res=>res.json())
     .then(res=>{
       setUsername(res.username)
-      setId(res.id)
+    
       setUserStuff([res])})}
  
 
