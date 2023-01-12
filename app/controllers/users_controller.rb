@@ -44,6 +44,6 @@ end
 end
 private
 def user_params
-  params.permit(:username, :password, :image_url) h
+  params.permit(:username, :password, :image_url) 
 end
 end
