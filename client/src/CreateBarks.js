@@ -4,7 +4,7 @@ import { useState } from "react"
  function CreateBarks({ id, barks,
 setBarks}){
 
-    const [refresh, setRefresh]=useState(false)
+    
     const [message, setMessage]=useState('')
     console.log(barks)
     function sendMessages(e){
@@ -15,9 +15,9 @@ setBarks}){
     if (message.includes('#')){
         let test= message.split('#')
     
-       console.log(test)
+    
        for (let i=1; i<test.length; i++){
-        console.log(test[i])
+  
         setTimeout(() => {
             fetch("http://localhost:3000/hashtags",{
                 method:"POST",
@@ -33,9 +33,9 @@ setBarks}){
             })
             .then(res=>res.json())
             .then(res=>{
-                console.log(barks)
+              
                 setBarks([ res,...barks])
-                console.log(barks)
+             
             })
         }, 1000);
        
@@ -60,14 +60,14 @@ setBarks}){
         })
         .then(res=>res.json())
         .then(res=>{
-            console.log(res)
+       
     setBarks([res,...barks])
   
          })}
          
  
            }
-console.log(barks)
+
 
 return (<div className="textBox">
 
