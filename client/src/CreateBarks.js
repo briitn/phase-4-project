@@ -2,11 +2,11 @@ import { useState } from "react"
 
 
  function CreateBarks({ id, barks,
-setBarks}){
+setBarks, userId}){
 
     
     const [message, setMessage]=useState('')
-    console.log(barks)
+    console.log(id)
     function sendMessages(e){
 
         e.preventDefault()
@@ -18,14 +18,14 @@ setBarks}){
     
        for (let i=1; i<test.length; i++){
   
-        setTimeout(() => {
-            fetch("http://localhost:3000/hashtags",{
+       
+            fetch(`http://localhost:3000/hashtags/`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body: JSON.stringify(
                     {
                   bark: message,
-                  user_id: id,
+                  user_id: userId,
                       name: test[i]
                     }
                 )
@@ -33,11 +33,13 @@ setBarks}){
             })
             .then(res=>res.json())
             .then(res=>{
+              setTimeout(() => {
+                setBarks([ res, ...barks])
+              }, 1000);
               
-                setBarks([ res,...barks])
-             
+             console.log(barks)
             })
-        }, 1000);
+        
        
        }
        

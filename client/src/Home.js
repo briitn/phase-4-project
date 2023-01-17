@@ -4,7 +4,7 @@ import {Fragment, useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
  import CreateBarks from './CreateBarks'
 
-function Home({userStuff, setUserStuff, id, setTagId, holdTagPosts,setTagName, tagId, setPostArray}){
+function Home({userStuff, setUserStuff, id, setTagId, holdTagPosts,setTagName, tagId, setPostArray, postArray}){
 
 const [allowBark, setAllowBark]=useState(false)
 const [barks, setBarks]=useState()
@@ -20,6 +20,7 @@ useEffect(()=>{
 
     })
 }, [userStuff])
+console.log(id)
 function changeProfilePic(e){
     e.preventDefault()
     fetch(`http://localhost:3000/users/`,{
@@ -97,7 +98,7 @@ const [editPic, setEditPic]=useState(false)
         )
       
     })
-   
+ 
     const mapBarks=barks?.map(item=>{
 
         return (
@@ -108,13 +109,16 @@ setTagName(item.name)
                     
                   })
             }}>
-                <img src={item.user.image_url}
+                <img src={item.user?.image_url}
                 className='profilePic' />
-              <b> {item.user.username}</b> 
+              <b> {item.user?.username}</b> 
               <div> {item.bark?.split("#")[0]}  <span className='tag' onClick={(e)=>{
                    fetch(`http://localhost:3000/sessions/${tagId}`)
                    .then(res=>res.json())
-                   .then(res=>setPostArray(res))
+                   .then(res=>{setPostArray(res)
+                    console.log(res)
+                console.log(postArray)
+           })
                  history.push('/hashtags')
               }}>{item.hashtags.map(item=>{
                 holdTagPosts.push(item)
@@ -129,7 +133,7 @@ setTagName(item.name)
 const filterBarks=barks?.filter(item=>{
    return item.hashtags
 })
-console.log(filterBarks)
+
     return(
        <Fragment>
 
@@ -139,8 +143,8 @@ console.log(filterBarks)
       
    {mapBarks}
     
-    <CreateBarks id={id} allowBark={allowBark} setAllowBark={setAllowBark} barks={barks}
-    setBarks={setBarks} />
+    <CreateBarks id={tagId} allowBark={allowBark} setAllowBark={setAllowBark} barks={barks}
+    setBarks={setBarks} userId={id} />
    </div>
 
 <button onClick={(e)=>{

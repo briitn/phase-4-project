@@ -11,4 +11,4 @@ My idea for this app was that a user creates an account and logs in with that ac
 
 ## Final product and Installation
 My final product has a create account page for users to make an account, which is required to send messages. After a user creates an account and signs in succefully with that account they can then send messages. A user can also edit their username and profile picture if they want. Users can aslo add hashtags to posts which they can then click on and see all other posts with that hashtag.
-To install begin by running bundle install then rails db:seed to seed the data in the seeds file. Finally, run rails server in one terminal and in another, after navigating to the react file, run npm start for the frontend server.
+To install begin by running bundle install then rails db:seed to seed the data in the seeds file. Finally, run ra server in one terminal and in another, after navigating to the react file, run npm start for the frontend server.

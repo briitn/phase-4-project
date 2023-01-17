@@ -20,7 +20,7 @@ end
 def destroy
   user=User.find(session[:user_id])
   user.posts.destroy_all
-  user.destro
+  user.destroy
 head :no_content
 
 end

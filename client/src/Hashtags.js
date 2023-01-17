@@ -2,7 +2,7 @@
 
 function Hashtags({ tagName, postArray, setPostArray}){
    
-
+    console.log(postArray)
 if (postArray===undefined){
 
 

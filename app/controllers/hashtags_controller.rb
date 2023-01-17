@@ -1,17 +1,15 @@
 class HashtagsController < ApplicationController
     def create
        tag= Hashtag.find_by(name: params[:name] )
-      if  tag
+      if tag
         hashtag=tag.posts.create(bark: params[:bark], user_id: params[:user_id])
       
         render json: hashtag
       else
         posts=@current_user.posts.create(bark: params[:bark], user_id: params[:user_id])
         session[:post_id]=posts.id
-         post=Post.find_by(id: session[:post_id])
+         post=Post.find(session[:post_id])
 post.hashtags.create(name: params[:name])
-
-
 render json: post
       end
     end
@@ -24,3 +22,4 @@ render json: post
     end
 
 end
+h

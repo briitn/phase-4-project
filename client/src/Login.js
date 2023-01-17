@@ -26,7 +26,7 @@ function Login({setUserStuff}){
             if (res.ok){
                 res.json().then((res)=>{setUserStuff([res])
                    history.push('/Home')
-                    console.log(res)
+                 
                 })
             }
             else {
@@ -42,7 +42,7 @@ function Login({setUserStuff}){
     function changePass(e){
 
         setPassword(e.target.value)
-        console.log(password)
+    
     }
 
     function changeUser(e){
@@ -51,6 +51,7 @@ function Login({setUserStuff}){
       
     }
     return (
+        
         <div className='fox'>
       
        
