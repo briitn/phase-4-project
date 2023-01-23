@@ -20,6 +20,16 @@ render json: post
      render json: post.order(created_at: :asc).limit(20)
 
     end
-
+def multi_tags
+    post=Post.find(session[:post_id])
+    post.hashtags.create(name: params[:name])
+    tag= Hashtag.find_by(name: params[:name] )
+    if tag
+      hashtag=tag.posts.create(bark: params[:bark], user_id: params[:user_id])
+    
+   
+    end
+    render json: post
+     
 end
-h
+end

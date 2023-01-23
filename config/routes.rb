@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :hashtags
   resources :posts
   
-  resources :sessions, only:[:show]
-
-
+  resources :sessions
+post '/tagsesh', to: "sessions#hate"
+post '/multiple', to: "hashtags#multi_tags"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
 patch '/users/', to: "users#update"

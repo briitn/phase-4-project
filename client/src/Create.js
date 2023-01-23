@@ -4,8 +4,11 @@ import { useHistory} from "react-router-dom"
 function Create(){
   const[newUsername, setNewUsername]=useState('')
     const [imageUrl, setImageUrl]=useState('')
-    const [password, setPassword]=useState('')
+    const [password, setPassword]
+    =useState('')
+   
    const [loading, setLoading]=useState(false)
+
    const history=useHistory()
 
     function changeSubmit(e){
@@ -22,6 +25,7 @@ function Create(){
 
             })
         }).then(r=>{if (r.ok) {
+            
             setLoading(true)
             setTimeout(() => {
                 history.push('/')

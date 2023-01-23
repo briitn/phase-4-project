@@ -106,10 +106,10 @@
   padding: 16px;
 
 }
-.bottomStuff{
+.bottom{
 
 bottom: 0px;
-position: relative;
+position: fixed;
 
 
 }

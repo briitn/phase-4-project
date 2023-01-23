@@ -1,31 +1,45 @@
 import { useState } from "react"
 
 
- function CreateBarks({ id, barks,
+ function CreateBarks({  barks,
 setBarks, userId}){
 
     
     const [message, setMessage]=useState('')
-    console.log(id)
+
     function sendMessages(e){
 
         e.preventDefault()
      
- 
+    
     if (message.includes('#')){
         let test= message.split('#')
-    
-    
-       for (let i=1; i<test.length; i++){
+   // if multiple hashtags create post the loop through and create each hashtags
+    if (test.length>2){
+        fetch('http://localhost:3000/posts',
+        {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify(
+                {
+              
+                  user_id: userId ,
+                  bark: message 
+              
+                }
+            )
+        })
+      // async to make sure post get created first then hashtags
+    setTimeout(() => {
+        for (let i=1; i<test.length; i++){
   
        
-            fetch(`http://localhost:3000/hashtags/`,{
+            fetch(`http://localhost:3000/multiple/`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body: JSON.stringify(
                     {
-                  bark: message,
-                  user_id: userId,
+                
                       name: test[i]
                     }
                 )
@@ -33,19 +47,48 @@ setBarks, userId}){
             })
             .then(res=>res.json())
             .then(res=>{
-              setTimeout(() => {
-                setBarks([ res, ...barks])
-              }, 1000);
               
-             console.log(barks)
+                    setBarks([ res, ...barks])
+             
+                  
+              
+       
             })
         
        
-       }
+       }}
+    , 1000); } 
+    //if only one tag, create tag first then create and associate the post
+       else{
+        for (let i=1; i<test.length; i++){
+
+        fetch(`http://localhost:3000/hashtags/`,{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(
+                    {
+                        user_id: userId ,
+                        bark: message,
+                        name: test[i]
+                 
+                    }
+                )
+        
+            })
+            .then(res=>res.json())
+            .then(res=>{
+           
+                setBarks([ res, ...barks])
+          
+        
+            })
+
+       }}
        
    
         
     }
+    // if no tag, simply create post
     else {
         fetch('http://localhost:3000/posts',
         {
@@ -54,7 +97,7 @@ setBarks, userId}){
             body: JSON.stringify(
                 {
               
-                  user_id: id ,
+                  user_id: userId ,
                   bark: message 
               
                 }
