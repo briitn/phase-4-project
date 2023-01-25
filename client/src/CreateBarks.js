@@ -14,7 +14,7 @@ setBarks, userId}){
     
     if (message.includes('#')){
         let test= message.split('#')
-   // if multiple hashtags create post the loop through and create each hashtags
+   // if multiple hashtags, create post then loop through and create each hashtag
     if (test.length>2){
         fetch('http://localhost:3000/posts',
         {
