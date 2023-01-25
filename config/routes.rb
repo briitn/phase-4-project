@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :posts
   
   resources :sessions
-post '/tagsesh', to: "sessions#hate"
+post '/tagsesh', to: "sessions#index"
 post '/multiple', to: "hashtags#multi_tags"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         end
     end
 
-    def hate
+    def index
 tag= Hashtag.find_by(name: params[:name])
 session[:hashtag_id]= tag.id
 render json: tag.posts.order(created_at: :desc).limit(20)

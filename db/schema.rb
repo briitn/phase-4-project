@@ -15,48 +15,12 @@ ActiveRecord::Schema.define(version: 2023_01_03_174725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "friend_requests", force: :cascade do |t|
-    t.string "requester"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "friends", force: :cascade do |t|
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-  end
-
-  create_table "group_messages", force: :cascade do |t|
-    t.string "group_text"
-    t.integer "group_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "groups", force: :cascade do |t|
-    t.integer "friend_id"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+ 
   create_table "hashtags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "views"
-  end
-
-  create_table "likes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "heart"
-    t.integer "dislike"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "post_id"
   end
 
   create_table "messages", force: :cascade do |t|
