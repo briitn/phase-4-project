@@ -34,7 +34,7 @@ setBarks, userId}){
         for (let i=1; i<test.length; i++){
   
        
-            fetch(`http://localhost:3000/multiple/`,{
+            fetch(`http://localhost:3000/hashtags/multiple`,{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body: JSON.stringify(
