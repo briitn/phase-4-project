@@ -55,6 +55,8 @@ function Login({setUserStuff}){
     return (
         
         <div className='fox'>
+            <span><em id="appName">TextChat</em>
+            <img src="/chat.jpeg" id='appLogo' alt="app logo"/></span>
        <p className="sign" align="center">Sign in</p>
         <form onSubmit={changeSubmit} className="form">
             <FormField>

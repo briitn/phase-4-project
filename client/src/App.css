@@ -123,7 +123,7 @@ height: fit-content;
   color: red;
   background-color: transparent;
   position: relative;
-  left:1100px
+  left:1000px
 }
 
 .profilePic{
@@ -185,6 +185,21 @@ background-color: #f1f1f1;
 .gotAcc{
   position: relative;
   left: 100px;
+}
+#appLogo{
+  width: 50px;
+margin-left: 200px;
+
+}
+#appName{
+position: relative;
+top:50px;
+  margin-left: 125px;
+  color: #21acd7;
+}
+#appLogoHome{
+  width: 50px;
+  margin-left: 0px;
 }
 .bottom{
 

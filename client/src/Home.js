@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom'
  import CreateBarks from './CreateBarks'
 import PICTURES from './pictures';
 function Home({userStuff, setUserStuff, id,  setTagName, setPostArray}){
-console.log(PICTURES)
 
+const [editProfile, setEditProfile]=useState(false)
 const [barks, setBarks]=useState()
 const [profilePic, setProfilePic]=useState('')
 const [newUserName, setNewUserName]=useState('')
@@ -21,7 +21,7 @@ useEffect(()=>{
     
 
     })
-}, [userStuff])
+}, [])
 
 
 
@@ -66,7 +66,7 @@ useEffect(()=>{
  }
 }, [newUserName,profilePic])
 
-const [editProfile, setEditProfile]=useState(false)
+
     const mapUserStuff=userStuff?.map(item=>{
    
         return(
@@ -163,6 +163,8 @@ console.log(profilePic)
     return(
        <Fragment>
         <header>
+        <span>
+            <img src="/chat.jpeg" id='appLogoHome' alt="app logo"/></span>
 <button id='logout' onClick={(e)=>{
    
     if (window.confirm("Are you sure you want to logout?")){

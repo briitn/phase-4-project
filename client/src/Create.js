@@ -1,14 +1,12 @@
 import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory} from "react-router-dom"
-
+import PICTURES from "./pictures"
 function Create(){
 
-    const PICTURES=[
-        '/public/duck.jpg', '/public/mario.webp', '/public/imposter.jpeg' ,"/public/pizza.jpg", '/public/water-melon.png', "/public/butterfly.jpeg"
-       ]
+    
 
-       console.log(PICTURES)
+    
   const[newUsername, setNewUsername]=useState('')
     const [imageUrl, setImageUrl]=useState('')
     const [password, setPassword]
@@ -20,7 +18,7 @@ function Create(){
 
     function changeSubmit(e){
         e.preventDefault()
-     
+        setLoading(true)
         fetch ("/users/signup", {
             method:"POST",
             headers: {"Content-Type": "application/json"},
@@ -28,18 +26,19 @@ function Create(){
                 username:newUsername,
                 password,
             
-                image_url: PICTURES[Math.floor(Math.random()*3)+1]
+                image_url: PICTURES[Math.floor(Math.random()*6)+1]
 
             })
         }).then(r=>{if (r.ok) {
             
-            setLoading(true)
+          
             setTimeout(() => {
                 history.push('/')
             }, 1000); 
             r.json();
-          } else {
+          } else { setLoading(false)
             r.json().then((err) => 
+           
             alert(err.errors));
           }})
     }
@@ -58,6 +57,8 @@ function Create(){
 
     return (
         <div className='fox'>
+            <span><em id="appName">TextChat</em>
+            <img src="/chat.jpeg" id='appLogo' alt="app logo"/></span>
             <p className="sign">Create Account</p>
         <form onSubmit={changeSubmit} className="form">
               <FormField>
