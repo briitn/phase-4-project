@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-#Create a custom route that uses a parameter to search the text content of the post (in the bark field) to find all the posts that meet that requirement. Then return all the hashtags connected to all the posts that meet this requirement.  . If there are no matches, return a json message that says so.
+
   resources :post_hashtags
   resources :hashtags
   resources :posts
