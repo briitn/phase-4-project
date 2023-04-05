@@ -1,7 +1,14 @@
 import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory} from "react-router-dom"
+
 function Create(){
+
+    const PICTURES=[
+        '/public/duck.jpg', '/public/mario.webp', '/public/imposter.jpeg' ,"/public/pizza.jpg", '/public/water-melon.png', "/public/butterfly.jpeg"
+       ]
+
+       console.log(PICTURES)
   const[newUsername, setNewUsername]=useState('')
     const [imageUrl, setImageUrl]=useState('')
     const [password, setPassword]
@@ -14,14 +21,14 @@ function Create(){
     function changeSubmit(e){
         e.preventDefault()
      
-        fetch ("http://localhost:3000/users/signup", {
+        fetch ("/users/signup", {
             method:"POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 username:newUsername,
                 password,
             
-                image_url: imageUrl
+                image_url: PICTURES[Math.floor(Math.random()*3)+1]
 
             })
         }).then(r=>{if (r.ok) {
@@ -49,53 +56,34 @@ function Create(){
       
     }
 
-    function changeProfilePic(e){
-        setImageUrl(e.target.value)
-    }
     return (
         <div className='fox'>
-      
-       
-
+            <p className="sign">Create Account</p>
         <form onSubmit={changeSubmit} className="form">
-            <FormField>
-            <label> Username:</label>
-            <input type='text'
-            name="username"
-
-            value={newUsername}
-            onChange={changeUser}
-            />
-            </FormField>
-            <FormField>
-        <label>
-
-            Password:
-        </label>
-            <input type='password'
-            name="password"
-
-            value={password}
-            onChange={changePass}/>
-     </FormField>
-     
-     <FormField>
-        <label>
-
-            Profile picture:
-        </label>
-            <input type='url'
-            name="imageUrl"
-
-            value={imageUrl}
-            onChange={changeProfilePic}/>
-     </FormField>
-    
-           <button type="submit" >Submit</button>
+              <FormField>
+           
+              <input type='text'
+              name="username"
+               className="username"
+               placeholder="username*"
+              value={newUsername}
+              onChange={changeUser}
+              />
+              </FormField>
+              <FormField>
          
+              <input type='password'
+              name="password"
+               className="username"
+               placeholder="password*"
+              value={password}
+              onChange={changePass}/>
+       </FormField>
+          <button type="submit" className="submit" >Submit</button>
            </form> 
-         
-       {loading?<div>'Account succesfully created. Redirecting to sign in page...' </div>:<div></div>}
+           <span className="gotAcc" ><p>Already have an account?<a href="/">Sign in</a></p>
+         {loading?<div>'Creating account... please wait' </div>:<div></div>}</span> 
+     
         </div>
       
     )

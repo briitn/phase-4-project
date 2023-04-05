@@ -1,12 +1,11 @@
+import { Fragment } from 'react';
 
 
 function Hashtags({ tagName, postArray, setPostArray, setTagName}){
-   
- 
+
+
 if (postArray===undefined){
-
-
-    fetch('http://localhost:3000/hashtags')
+fetch('/hashtags')
     .then(res=>res.json())
     .then(res=>{
         setTagName(res[0].hashtags[0].name)
@@ -15,23 +14,24 @@ if (postArray===undefined){
 
 
 const mapPostArray=postArray?.map(item=>{
- 
-    return (
-        <div key={item.id} className="container">
-<img src={item.user.image_url} 
-alt='userImage'
-className='profilePic'/>
-<b> {item.user.username}</b> 
-<p>{item.bark}</p>
+ return (
+ <div key={item.id} className="container">
+  <img src={item.user.image_url} 
+  alt='userImage'
+   className='profilePic'/>
+  <b> {item.user.username}</b> 
+   <p>{item.bark}</p>
         </div>
     )
 })
 
 return (
-    <div className="box">
-        <p>#{tagName}</p>
+    <Fragment>
+       <div className="box">
+        <a href='/home'>←Go back</a>
+        <p>{tagName}</p>
         {mapPostArray}
-    </div>
+    </div></Fragment>
 )
 }
 

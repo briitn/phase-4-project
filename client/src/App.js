@@ -17,7 +17,7 @@ function App() {
 
 
   useEffect(()=>{
-    fetch("http://localhost:3000/home")
+    fetch("/home")
     .then(res=>res.json())
     .then(res=>{
 

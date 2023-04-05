@@ -1,17 +1,23 @@
 class HashtagsController < ApplicationController
     def create
-       tag= Hashtag.find_by(name: params[:name] )
-      if tag
-        hashtag=tag.posts.create(bark: params[:bark], user_id: params[:user_id])
+      hold_tags=params[:tags]
+      post=Post.create(bark: params[:bark],
+             user_id: params[:user_id])
       
-        render json: hashtag
-      else
-        posts=@current_user.posts.create(bark: params[:bark], user_id: params[:user_id])
-        session[:post_id]=posts.id
-         post=Post.find(session[:post_id])
-post.hashtags.create(name: params[:name])
+
+hold_tags.each do |t|
+  tag=Hashtag.find_by(name:t)
+
+  if tag
+      post.hashtags << tag
+
+  else
+
+      post.hashtags.create(name: t )
+  end
+end
 render json: post
-      end
+ 
     end
 
     def index
@@ -20,16 +26,5 @@ render json: post
      render json: post.order(created_at: :asc).limit(20)
 
     end
-def multi_tags
-    post=Post.find(session[:post_id])
-    post.hashtags.create(name: params[:name])
-    tag= Hashtag.find_by(name: params[:name] )
-    if tag
-      hashtag=tag.posts.create(bark: params[:bark], user_id: params[:user_id])
-    
-   
-    end
-    render json: post
-     
-end
+
 end

@@ -5,12 +5,13 @@ function Login({setUserStuff}){
 
     const history= useHistory()
     const [username, setUsername]=useState('')
-
+    const [loading, setLoading]=useState(false)
     const [password, setPassword]=useState('')
 
     function changeSubmit(e){
         e.preventDefault()
-        fetch("http://localhost:3000/users/login",
+        setLoading(true)
+        fetch("/users/login",
         {
             method:"POST",
             headers:{
@@ -30,6 +31,7 @@ function Login({setUserStuff}){
                 })
             }
             else {
+                setLoading(false)
                 res.json().then((err) => {
                 alert(err.errors)})
             }
@@ -53,36 +55,33 @@ function Login({setUserStuff}){
     return (
         
         <div className='fox'>
-      
-       
-        <h1 className="appName"> <i>Text chat</i>
-       </h1>
+       <p className="sign" align="center">Sign in</p>
         <form onSubmit={changeSubmit} className="form">
             <FormField>
-            <label> Username:</label>
+            
             <input type='text'
             name="username"
-
+            placeholder="Username"
+            className="username"
             value={username}
             onChange={changeUser}
             />
             </FormField>
             <FormField>
-        <label>
-
-            Password:
-        </label>
+      
             <input type='text'
             name="password"
-
+            className="username"
+             placeholder="Password"
             value={password}
             onChange={changePass}/>
      </FormField>
-           <button type="submit" >Login</button>
-          
+           {loading?<button className="submit">Signing you in...</button>:<button className="submit" >
+            Sign in</button>}
+            <p  className='sc'> <a  href='./create'>Create an account</a> </p>
            </form> 
-        
-        <a href='./create'>Create an account</a>
+     
+      
         </div>
       
     )

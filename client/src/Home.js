@@ -1,49 +1,42 @@
 
 import {Fragment, useEffect, useState} from 'react'
+import Hashtags from 'react-highlight-hashtags';
 
 import { useHistory } from 'react-router-dom'
  import CreateBarks from './CreateBarks'
-
+import PICTURES from './pictures';
 function Home({userStuff, setUserStuff, id,  setTagName, setPostArray}){
-
+console.log(PICTURES)
 
 const [barks, setBarks]=useState()
 const [profilePic, setProfilePic]=useState('')
 const [newUserName, setNewUserName]=useState('')
-
+const [hideButton, setHideButton]= useState('')
 const history=useHistory()
 // initial fetch to get posts and runs again if user updated their name or profile picture
 useEffect(()=>{
-    fetch("http://localhost:3000/posts")
+    fetch("/posts")
 .then(res=>res.json())
 .then(res=>{  setBarks(res)
+    
 
     })
 }, [userStuff])
 
-function changeProfilePic(e){
-    e.preventDefault()
-    fetch(`http://localhost:3000/users/`,{
-method:"PATCH",
-headers:{"Content-Type":"application/json"},
-body:  JSON.stringify(
-    {
-        image_url: profilePic
-    }
-)})
-.then(res=>res.json())
-.then(res=>{  setUserStuff([res])
-})}
 
 
-function changeUsername(e){
+
+
+function changeUserstuff(e){
     e.preventDefault()
-    fetch(`http://localhost:3000/users/`,{
+    fetch(`/users/`,{
         method:"PATCH",
         headers:{"Content-Type":"application/json"},
         body:  JSON.stringify(
+            
             {
-                username: newUserName
+              username: newUserName,
+                image_url: profilePic
             }
         )})
         .then((res)=>{
@@ -61,7 +54,18 @@ function changeUsername(e){
 
        
     }
-// username and profile input fields appear if true
+
+
+ 
+useEffect(()=>{
+    if (newUserName.trim() || profilePic.trim() ){
+        setHideButton(true)
+ }
+ else {
+    setHideButton(false)
+ }
+}, [newUserName,profilePic])
+
 const [editProfile, setEditProfile]=useState(false)
     const mapUserStuff=userStuff?.map(item=>{
    
@@ -71,23 +75,30 @@ const [editProfile, setEditProfile]=useState(false)
                 alt='userImage'/>
                <button          onClick={(e)=>{setEditProfile(true)}}>Edit Profile</button>
                {editProfile?<div>
-                <form onSubmit={changeProfilePic}>
+                <button onClick={()=>{setEditProfile(false)}}>x</button>
+                <form onSubmit={changeUserstuff} className='editStuff'>
+                
+                    <div>
                 <span>New Profile Picture:</span>
-                <input type='text'
-              
-                value={profilePic}
-                onChange={(e)=>{
-                    setProfilePic(e.target.value)
-                }}
-                />
-                </form>
-                <form onSubmit={changeUsername}>
-                <span>New Username</span>
-                <input type='text'
+                
+              {PICTURES.map(item=>{
+                
+                return (<li onClick={(e)=>{setProfilePic(item)}} key={Math.random()}>
+
+                <img src={item} className='profilePic'/>
+              </li>)})}
+                </div>
+                <div>
+                <span> New Username:  </span>
+                 <input type='text'
                 value={newUserName}
                 onChange={(e)=>
                 {setNewUserName(e.target.value)}}/>
-                </form>
+              </div>
+               { hideButton?<button>Submit</button>
+               :<button disabled={true}>Submit</button>} 
+               </form>
+            
           
                </div>:<div></div>}
                 <p><b>@{item.username}</b></p>
@@ -100,75 +111,83 @@ const [editProfile, setEditProfile]=useState(false)
       
     })
 
-    const mapBarks=barks?.map(item=>{
+let test;
+setTimeout(() => {
+    test= document.querySelectorAll(".makes")
+}, 100); 
+
+console.log(profilePic)
+    const mapBarks=barks?.map(item=>
+        { setTimeout(() => {
+            for (const element of test) {
+                for (const items of element.children){
+               items.addEventListener("click", function(e){
+                console.log(e.target.textContent)
+                 setTagName(e.target.textContent)
+                 fetch(`tagsesh/`, {
+                  method:"POST",
+                  headers: {"Content-Type": "application/json"},
+                  body: JSON.stringify({
+                  name:e.target.textContent
+             
+                  })
+              })
+                 .then(res=>res.json())
+                 .then(res=>{
+             
+             setPostArray(res)
+             });
+              setTimeout(() => {
+                 history.push('/hashtags')
+              },500); 
+               })
+                }
+               }    
+        }, 250);
+     
 
 
-        return (
+  return (
             <div key={item.id} className="container" >
                 <img src={item.user.image_url}
                 alt='userImage'
                 className='profilePic' />
               <b> {item.user.username}</b> 
-              <div> {item.bark.split("#")[0]}  <span className='tag' >{item.hashtags.map(item=>{
-                
-                return (<span key={item.id} onClick={(e)=>{
-                setTagName(item.name)
-                    fetch(`http://localhost:3000/tagsesh/`, {
-                     method:"POST",
-                     headers: {"Content-Type": "application/json"},
-                     body: JSON.stringify({
-                     name: item.name
-         
-                     })
-                 })
-                    .then(res=>res.json())
-                    .then(res=>{
-               
-               setPostArray(res)
-            })
-                  history.push('/hashtags')
-               }}>#{item.name}</span>)
-              })}</span></div>
-            
-         
-
+             <div className='makes'><Hashtags >{item.bark}</Hashtags></div> 
             </div>
-        )
+            )
+       
     })
 
 
     return(
        <Fragment>
-
-{mapUserStuff}
-       <div className='box'>
-   
-      
-   {mapBarks}
-    
-    <CreateBarks  barks={barks} setBarks={setBarks} userId={id} />
-   </div>
-<div className='bottom'>
-<button onClick={(e)=>{
+        <header>
+<button id='logout' onClick={(e)=>{
    
     if (window.confirm("Are you sure you want to logout?")){
-    fetch("http://localhost:3000/logout",
+    fetch("/logout",
     {
         method: "DELETE"
     })
    history.push('/')}
 }}>Logout</button>
 
-  <button onClick={(e)=>{
-   
-    if( window.confirm("Are you sure you want to delete your account?")){
-    fetch(`http://localhost:3000/users/`,
+  <button id='delete'onClick={(e)=>{
+   if( window.confirm("Are you sure you want to delete your account?")){
+    fetch(`users/`,
     {
         method: "DELETE"
     })
    history.push('/')}
 }}>Delete Account</button>
-    </div>
+    </header>
+        {mapUserStuff}
+       <footer className='box'>
+       {mapBarks}
+     <CreateBarks  barks={barks} setBarks={setBarks} userId={id} />
+   </footer>
+
        </Fragment>
     )
 

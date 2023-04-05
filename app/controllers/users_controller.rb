@@ -26,16 +26,22 @@ head :no_content
 end
 def update
   user=User.find(session[:user_id])
-  if params[:image_url]
-    user.update(image_url: params[:image_url])
-    render json: user
-  elsif params[:username]
+ if params[:image_url].length>0
+  new_image= params[:image_url]
+  user.image_url= new_image
+  user.save(validate: false)
+ 
+  render json: user
+elsif params[:username].length>0
     users=User.find_by(username: params[:username])
     if users
 
     render json: {errors: ["Username already taken"]},status: :unprocessable_entity
     else
-      user.update(username: params[:username])
+        new_username= params[:username]
+        user.username= new_username
+        user.save(validate: false)
+ 
       render json: user
   end
 end

@@ -23,12 +23,7 @@ ActiveRecord::Schema.define(version: 2023_01_03_174725) do
     t.integer "views"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.integer "friend_id"
-    t.string "message"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+
 
   create_table "post_hashtags", force: :cascade do |t|
     t.integer "post_id"
