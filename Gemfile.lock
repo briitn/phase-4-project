@@ -180,6 +180,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
+  actioncable
   active_model_serializers (~> 0.10.12)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
@@ -198,4 +199,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.24
+   2.3.26

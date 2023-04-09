@@ -16,12 +16,6 @@ class PostsController < ApplicationController
   end;
    
 
-def alpha
-    posts=@current_user.posts
-    render json:  posts.sort_by{|p| p.bark}
-
-end
-
     private
 
     def post_params

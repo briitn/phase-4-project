@@ -26,7 +26,7 @@ function Login({setUserStuff}){
         .then((res)=>{
             if (res.ok){
                 res.json().then((res)=>{setUserStuff([res])
-                   history.push('/Home')
+                   history.push('/homepage')
                  
                 })
             }

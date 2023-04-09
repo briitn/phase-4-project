@@ -13,13 +13,14 @@ setBarks, userId}){
    
     function sendMessages(e){
         e.preventDefault();
+        
         splitMsgs.map(item=> {
         if (item.charAt(0)==='#'){
             tags.push(item)
         }
             })
       
-            console.log(tags)
+     
         if (tags.length===0){
             fetch(`/posts/`,{
                             method:"POST",

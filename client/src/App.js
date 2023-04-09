@@ -5,8 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
 import { useEffect, useState } from 'react';
 import Create from './Create';
-import Home from './Home'
-import Hashtags from './Hashtags';
+import Home from './Homepage'
+import Hashtags from './HandleHashtags';
 function App() {
   const [postArray, setPostArray]=useState()
   
@@ -35,12 +35,12 @@ function App() {
     <Route exact path='/create'>
       <Create />
     </Route>
-    <Route exact path='/home'>
+    <Route exact path='/homepage'>
 <Home userStuff={userStuff} setUserStuff={setUserStuff} 
  setTagName={setTagName} setPostArray={setPostArray} id={id} tagName={tagName}
  />
     </Route>
- <Route exact path='/hashtags'>
+ <Route exact path='/HandleHashtags'>
   <Hashtags   tagName={tagName} setPostArray={setPostArray} postArray={postArray} setTagName={setTagName} />
 
  </Route>

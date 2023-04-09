@@ -138,7 +138,7 @@ console.log(profilePic)
              setPostArray(res)
              });
               setTimeout(() => {
-                 history.push('/hashtags')
+                 history.push('/HandleHashtags')
               },500); 
                })
                 }

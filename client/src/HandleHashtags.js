@@ -28,7 +28,7 @@ const mapPostArray=postArray?.map(item=>{
 return (
     <Fragment>
        <div className="box">
-        <a href='/home'>←Go back</a>
+        <a href='/homepage'>←Go back</a>
         <p>{tagName}</p>
         {mapPostArray}
     </div></Fragment>
