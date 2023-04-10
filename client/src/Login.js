@@ -1,7 +1,7 @@
 import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory } from "react-router-dom"
-function Login({setUserStuff}){
+function Login({setUserStuff, setProgress}){
 
     const history= useHistory()
     const [username, setUsername]=useState('')
@@ -9,7 +9,9 @@ function Login({setUserStuff}){
     const [password, setPassword]=useState('')
 
     function changeSubmit(e){
+        
         e.preventDefault()
+        setProgress(20)
         setLoading(true)
         fetch("/users/login",
         {
@@ -24,14 +26,18 @@ function Login({setUserStuff}){
             )
         })
         .then((res)=>{
+            setProgress(50)
             if (res.ok){
+                setProgress(100)
                 res.json().then((res)=>{setUserStuff([res])
+                    setProgress(0)
                    history.push('/homepage')
                  
                 })
             }
             else {
                 setLoading(false)
+                setProgress(0)
                 res.json().then((err) => {
                 alert(err.errors)})
             }

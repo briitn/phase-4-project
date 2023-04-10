@@ -1,17 +1,25 @@
 
 import {Fragment, useEffect, useState} from 'react'
 import Hashtags from 'react-highlight-hashtags';
+import TopLoadingBar from 'react-top-loading-bar';
+
+
 
 import { useHistory } from 'react-router-dom'
  import CreateBarks from './CreateBarks'
 import PICTURES from './pictures';
-function Home({userStuff, setUserStuff, id,  setTagName, setPostArray}){
-
+function Home({userStuff, setUserStuff, id,  setTagName, setPostArray, setProgress}){
+const [isSelected, setIsSelected]=useState(false)
 const [editProfile, setEditProfile]=useState(false)
 const [barks, setBarks]=useState()
 const [profilePic, setProfilePic]=useState('')
 const [newUserName, setNewUserName]=useState('')
 const [hideButton, setHideButton]= useState('')
+const liStyle = {
+    transform: "scale(1.05)",
+    boxShadow: "0 0 20px rgba(0, 0, 0, 0.3)",
+  };
+  
 const history=useHistory()
 
 useEffect(() => {
@@ -26,9 +34,13 @@ useEffect(() => {
   
 
 
-
+function changeSelect(e){
+    setIsSelected(true)
+}
 
 function changeUserstuff(e){
+    setProgress(20)
+    setProgress(50)
     e.preventDefault()
     fetch(`/users/`,{
         method:"PATCH",
@@ -41,14 +53,18 @@ function changeUserstuff(e){
             }
         )})
         .then((res)=>{
-            if (res.ok){
-                res.json().then((res)=>{setUserStuff([res])
+            if (res.ok){  setProgress(100)
+                res.json().then((res)=>{
+                  
+                    setUserStuff([res])
+                    setProgress(0)
               
                 })
             }
             else {
                 res.json().then((err) => {
-               alert(err.errors)})
+               alert(err.errors)
+               setProgress(0)})
             }
 
         })
@@ -84,7 +100,8 @@ useEffect(()=>{
                 
               {PICTURES.map(item=>{
                 
-                return (<li onClick={(e)=>{setProfilePic(item)}} key={Math.random()}>
+                return (<li onClick={(e)=>{setProfilePic(item)
+                e.target.style.transform='scale(1.20)'}} key={Math.random()}>
 
                 <img src={item} className='profilePic'/>
               </li>)})}
@@ -160,9 +177,11 @@ console.log(profilePic)
        
     })
 
+  
 
     return(
        <Fragment>
+     
         <header>
         <span>
             <img src="/chat.jpeg" id='appLogoHome' alt="app logo"/></span>
@@ -188,7 +207,7 @@ console.log(profilePic)
         {mapUserStuff}
        <footer className='box'>
        {mapBarks}
-     <CreateBarks  barks={barks} setBarks={setBarks} userId={id} />
+     <CreateBarks  barks={barks} setBarks={setBarks} userId={id}  setProgress={setProgress} />
    </footer>
 
        </Fragment>

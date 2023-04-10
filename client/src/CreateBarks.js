@@ -2,10 +2,10 @@ import { useState } from "react"
 
 
  function CreateBarks({  barks,
-setBarks, userId}){
+setBarks, userId,setProgress}){
     const[tags, setTags]=useState([])
- 
-    
+ const [loading, setLoading]=useState(false)
+
     const [message, setMessage]=useState('');
 
     const splitMsgs=message.split(' ');
@@ -13,7 +13,8 @@ setBarks, userId}){
    
     function sendMessages(e){
         e.preventDefault();
-        
+        setProgress(20)
+       
         splitMsgs.map(item=> {
         if (item.charAt(0)==='#'){
             tags.push(item)
@@ -22,6 +23,7 @@ setBarks, userId}){
       
      
         if (tags.length===0){
+            setProgress(50)
             fetch(`/posts/`,{
                             method:"POST",
                             headers:{"Content-Type":"application/json"},
@@ -33,18 +35,19 @@ setBarks, userId}){
                             )
                     
                         })
-                        .then((res)=>{
+                        .then((res)=>{setProgress(100)
                             if (res.ok){
                                 res.json().then((res)=>{setBarks([res, ...barks])
                               setMessage('')
+                              setProgress(0)
                                 })
                             }
                             else {
                                 res.json().then((err) => {
-                                   
+                                    setProgress(0)
                                alert(err.errors)})
                 }
-            })}else if (tags.length!=0) {
+            })}else if (tags.length!=0) { setProgress(50)
                 fetch("/hashtags",
             {method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -58,12 +61,18 @@ setBarks, userId}){
             
             
             })
-            .then(res=>res.json())
-            .then(res=>{
-            
-             setBarks([res,...barks])
-            })
- }}
+            .then((res)=>{setProgress(100)
+                if (res.ok){
+                    res.json().then((res)=>{setBarks([res, ...barks])
+                  setMessage('')
+                  setProgress(0)
+                    })
+                }
+                else {
+                    res.json().then((err) => {
+                        setProgress(0)
+                   alert(err.errors)})
+    }})}}
 
 
 return (<div className="textBox">

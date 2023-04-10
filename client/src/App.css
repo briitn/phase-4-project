@@ -12,7 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.picLists:hover{
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+   width: 10px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -33,7 +37,11 @@
   height: 5px;
   animation: spin 2s linear infinite;
 }
-
+.top-load{
+  background-color: blue;
+  width: 15px;
+  height: 15px;
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

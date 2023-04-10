@@ -2,7 +2,7 @@ import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory} from "react-router-dom"
 import PICTURES from "./pictures"
-function Create(){
+function Create({setProgress}){
 
     
 
@@ -18,6 +18,7 @@ function Create(){
 
     function changeSubmit(e){
         e.preventDefault()
+        setProgress(20)
         setLoading(true)
         fetch ("/users/signup", {
             method:"POST",
@@ -29,14 +30,16 @@ function Create(){
                 image_url: PICTURES[Math.floor(Math.random()*6)+1]
 
             })
-        }).then(r=>{if (r.ok) {
-            
-          
+        }).then(r=>{setProgress(50);
+             if (r.ok) {
+                setProgress(100)
             setTimeout(() => {
+                setProgress(0)
                 history.push('/')
             }, 1000); 
             r.json();
           } else { setLoading(false)
+            setProgress(0)
             r.json().then((err) => 
            
             alert(err.errors));
