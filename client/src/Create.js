@@ -8,7 +8,7 @@ function Create({setProgress}){
 
     
   const[newUsername, setNewUsername]=useState('')
-    const [imageUrl, setImageUrl]=useState('')
+
     const [password, setPassword]
     =useState('')
    
