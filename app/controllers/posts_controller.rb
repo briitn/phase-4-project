@@ -4,7 +4,8 @@ class PostsController < ApplicationController
     def create
  post=@current_user.posts.create!(post_params)
         session[:post_id]=post.id
-        
+        ActionCable.server.broadcast 'barks_channel', post
+
         render json: post, status: :created
     end;
         

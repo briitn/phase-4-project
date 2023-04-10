@@ -13,16 +13,17 @@ const [profilePic, setProfilePic]=useState('')
 const [newUserName, setNewUserName]=useState('')
 const [hideButton, setHideButton]= useState('')
 const history=useHistory()
-// initial fetch to get posts and runs again if user updated their name or profile picture
-useEffect(()=>{
-    fetch("/posts")
-.then(res=>res.json())
-.then(res=>{  setBarks(res)
-    
 
-    })
-}, [])
-
+useEffect(() => {
+    const interval = setInterval(async () => {
+      const response = await fetch('/posts');
+      const data = await response.json();
+      setBarks(data);
+    }, 1000); // fetch new posts every second
+  
+    return () => clearInterval(interval);
+  }, []);
+  
 
 
 
