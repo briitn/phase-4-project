@@ -15,62 +15,51 @@ const [barks, setBarks]=useState()
 const [profilePic, setProfilePic]=useState('')
 const [newUserName, setNewUserName]=useState('')
 const [hideButton, setHideButton]= useState('')
-const liStyle = {
-    transform: "scale(1.05)",
-    boxShadow: "0 0 20px rgba(0, 0, 0, 0.3)",
-  };
-  
+
 const history=useHistory()
 
 useEffect(() => {
+
     const interval = setInterval(async () => {
       const response = await fetch('/posts');
       const data = await response.json();
       setBarks(data);
-    }, 1000); // fetch new posts every second
   
-    return () => clearInterval(interval);
+    }, 1000); // fetch new posts every second
+
+
+  return () => clearInterval(interval);
   }, []);
   
 
 
-function changeSelect(e){
-    setIsSelected(true)
-}
-
 function changeUserstuff(e){
-    setProgress(20)
-    setProgress(50)
-    e.preventDefault()
-    fetch(`/users/`,{
-        method:"PATCH",
-        headers:{"Content-Type":"application/json"},
-        body:  JSON.stringify(
-            
-            {
-              username: newUserName,
-                image_url: profilePic
-            }
-        )})
-        .then((res)=>{
-            if (res.ok){  setProgress(100)
-                res.json().then((res)=>{
-                  
-                    setUserStuff([res])
-                    setProgress(0)
-              
-                })
-            }
-            else {
-                res.json().then((err) => {
-               alert(err.errors)
-               setProgress(0)})
-            }
-
+    setProgress(20);
+    setProgress(50);
+    e.preventDefault();
+    fetch(`/users/`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            username: newUserName,
+            image_url: profilePic
         })
-
-       
-    }
+    })
+    .then((res) => {
+        if (res.ok) {
+            setProgress(100);
+            res.json().then((res) => {
+                setUserStuff([res]);
+                setProgress(0);
+            });
+        } else {
+            res.json().then((err) => {
+                alert(err.errors);
+                setProgress(0);
+            });
+        }
+    });
+}
 
 
  
@@ -99,11 +88,9 @@ useEffect(()=>{
                 <span>New Profile Picture:</span>
                 
               {PICTURES.map(item=>{
-                
                 return (<li onClick={(e)=>{setProfilePic(item)
-                e.target.style.transform='scale(1.20)'}} key={Math.random()}>
-
-                <img src={item} className='profilePic'/>
+                e.target.style.transform='scale(1.20'}} key={Math.random()}>
+              <img src={item} className='profilePic'/>
               </li>)})}
                 </div>
                 <div>
@@ -116,67 +103,76 @@ useEffect(()=>{
                { hideButton?<button>Submit</button>
                :<button disabled={true}>Submit</button>} 
                </form>
-            
-          
-               </div>:<div></div>}
+             </div>:<div></div>}
                 <p><b>@{item.username}</b></p>
-         
-
-</div>
+         </div>
      
 
-        )
+  )
       
     })
 
-let test;
-setTimeout(() => {
-    test= document.querySelectorAll(".makes")
-}, 100); 
+  
 
-console.log(profilePic)
-    const mapBarks=barks?.map(item=>
-        { setTimeout(() => {
-            for (const element of test) {
-                for (const items of element.children){
-               items.addEventListener("click", function(e){
-                console.log(e.target.textContent)
-                 setTagName(e.target.textContent)
-                 fetch(`tagsesh/`, {
-                  method:"POST",
-                  headers: {"Content-Type": "application/json"},
-                  body: JSON.stringify({
-                  name:e.target.textContent
-             
-                  })
-              })
-                 .then(res=>res.json())
-                 .then(res=>{
-             
-             setPostArray(res)
-             });
-              setTimeout(() => {
-                 history.push('/HandleHashtags')
-              },500); 
-               })
-                }
-               }    
-        }, 250);
-     
+        const handleHashtagClick = (hashtag) => {
+          setProgress(50)
+            fetch(`tagsesh/`, {
+                method:"POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                name:hashtag
+           
+                })
+            })
+               .then(res=>{
+                setProgress(100)
+                res.json()})
+               .then(res=>{
+           setProgress(0)
+           setPostArray(res)
+           history.push('/HandleHashtags')
+           ; 
+           });
+          
+              
+           
+            // Perform some action when a hashtag is clicked
+          };
+          
+          const mapBarks = barks?.map((item) => {
 
-
-  return (
-            <div key={item.id} className="container" >
-                <img src={item.user.image_url}
-                alt='userImage'
-                className='profilePic' />
-              <b> {item.user.username}</b> 
-             <div className='makes'><Hashtags >{item.bark}</Hashtags></div> 
-            </div>
-            )
-       
-    })
-
+          
+            return (
+              <div key={item.id} className="container">
+                <img
+                  src={item.user.image_url}
+                  alt="userImage"
+                  className="profilePic"
+                />
+                <b>{item.user.username}</b>
+                <div className="makes">
+                  {item.bark.split(" ").map((text, index) => {
+                    if (text.startsWith("#")) {
+                      return (
+                        <span
+                          key={`${item.id}-${index}`}
+                          className="hashtag"
+                          style={{color:'blue'}}
+                          onClick={() => handleHashtagClick(text)}
+                         
+                        >
+                          {text}
+                        </span>
+                      );
+                    } else {
+                      return <span key={`${item.id}-${index}`}>{text}</span>;
+                    }
+                  })}
+                </div>
+              </div>
+            );
+          });
+          
   
 
     return(

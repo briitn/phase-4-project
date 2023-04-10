@@ -48,7 +48,8 @@ function App() {
  />
     </Route>
  <Route exact path='/HandleHashtags'>
-  <Hashtags   tagName={tagName} setPostArray={setPostArray} postArray={postArray} setTagName={setTagName} />
+  <Hashtags   tagName={tagName} setPostArray={setPostArray}
+   postArray={postArray} setTagName={setTagName} setProgress={setProgress} />
 
  </Route>
    </Switch>

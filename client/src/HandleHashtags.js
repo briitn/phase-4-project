@@ -1,16 +1,18 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 
 function Hashtags({ tagName, postArray, setPostArray, setTagName}){
+useEffect(()=>{
+    if (postArray===undefined){
+        fetch('/hashtags')
+            .then(res=>res.json())
+            .then(res=>{
+                setTagName(res[0].hashtags[0].name)
+                setPostArray(res)})
+        }
+        
+},[])
 
-
-if (postArray===undefined){
-fetch('/hashtags')
-    .then(res=>res.json())
-    .then(res=>{
-        setTagName(res[0].hashtags[0].name)
-        setPostArray(res)})
-}
 
 
 const mapPostArray=postArray?.map(item=>{
