@@ -14,8 +14,8 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
   
       const updatedTags = splitMsgs.filter((item) => item.charAt(0) === '#');
       setTags(updatedTags);
-  
-      if (tags.length === 0) {
+  console.log(updatedTags)
+      if (updatedTags.length === 0) {
         setProgress(50);
         try {
           const res = await fetch('/posts/', {
@@ -40,14 +40,14 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
         } catch (error) {
           console.log(error);
         }
-      } else if (tags.length !== 0) {
+      } else if (updatedTags) {
         setProgress(50);
         try {
           const res = await fetch('/hashtags', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              tags,
+              tags: updatedTags,
               user_id: userId,
               bark: message,
             }),

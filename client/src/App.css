@@ -115,7 +115,9 @@ height: fit-content;
 }
 
 
-
+#stupid{
+  display: inline-block;
+}
 .reqList{
   list-style-type: none;
   padding: 0;

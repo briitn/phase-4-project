@@ -61,7 +61,7 @@ function changeUserstuff(e){
     });
 }
 
-
+console.log(barks)
  
 useEffect(()=>{
     if (newUserName.trim() || profilePic.trim() ){
@@ -136,44 +136,59 @@ useEffect(()=>{
           
               
            
-            // Perform some action when a hashtag is clicked
+
           };
           
           const mapBarks = barks?.map((item) => {
-
+console.log(item.bark)
           
             return (
               <div key={item.id} className="container">
-                <img
-                  src={item.user.image_url}
-                  alt="userImage"
-                  className="profilePic"
-                />
-                <b>{item.user.username}</b>
-                <div className="makes">
-                  {item.bark.split(" ").map((text, index) => {
-                    if (text.startsWith("#")) {
-                      return (
-                        <span
-                          key={`${item.id}-${index}`}
-                          className="hashtag"
-                          style={{color:'blue'}}
-                          onClick={() => handleHashtagClick(text)}
-                         
-                        >
-                          {text}
-                        </span>
-                      );
-                    } else {
-                      return <span key={`${item.id}-${index}`}>{text}</span>;
-                    }
-                  })}
-                </div>
-              </div>
+  <img
+    src={item.user.image_url}
+    alt="userImage"
+    className="profilePic"
+  />
+  <b>{item.user.username}</b>
+  <div className="makes">
+    {item.bark.split(/\s+/).map((text, index) => {
+      if (text.startsWith("#")) {
+        console.log(item.bark)
+        return (
+          <div id='stupid'>
+          <span
+            key={`${item.id}-${index}`}
+            className="hashtag"
+            style={{color:'blue'}}
+            onClick={() => handleHashtagClick(text)}
+          >
+            <em></em>
+            {text}
+          </span><em>&#160;</em></div>
+        );
+      } else {
+        const holdT=item.bark
+        
+        return <span key={`${item.id}-${index}`}>{text} <em>  </em></span>;
+      }
+    })}
+  </div>
+</div>
             );
           });
           
-  
+          const observer= new IntersectionObserver((entries)=>{
+            entries?.forEach((entry)=>{
+        
+                if(entry.isIntersecting){
+                    entry.target.classList.add('show')
+                }
+                else {entry.target.classList.remove('show')}
+            })
+        })
+        
+        const hiddenElements=document.querySelectorAll('.container')
+        hiddenElements.forEach((el)=>{observer.observe(el)}) 
 
     return(
        <Fragment>
