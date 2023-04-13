@@ -31,14 +31,15 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
           const data = await res.json();
   
           if (res.ok) {
+            setProgress(0);
             setBarks([data, ...barks]);
             setMessage('');
-            setProgress(0);
+           
           } else {
             alert(data.errors);
           }
         } catch (error) {
-          console.log(error);
+          alert(error);
         }
       } else if (updatedTags) {
         setProgress(50);
@@ -57,14 +58,14 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
           const data = await res.json();
   
           if (res.ok) {
+            setProgress(0);
             setBarks([data, ...barks]);
             setMessage('');
-            setProgress(0);
           } else {
             alert(data.errors);
           }
         } catch (error) {
-          console.log(error);
+          alert(error);
         }
       }
     }
