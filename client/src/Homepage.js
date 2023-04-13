@@ -167,7 +167,7 @@ console.log(item.bark)
           </span><em>&#160;</em></div>
         );
       } else {
-        const holdT=item.bark
+  
         
         return <span key={`${item.id}-${index}`} className='noTag'>{text} <em>  </em></span>;
       }
