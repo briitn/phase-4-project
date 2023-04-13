@@ -25,7 +25,7 @@ useEffect(() => {
       const data = await response.json();
       setBarks(data);
   
-    }, 1000); // fetch new posts every second
+    }, 3000); // fetch new posts every 3 seconds
 
 
   return () => clearInterval(interval);
