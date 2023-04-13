@@ -14,7 +14,7 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
   
       const updatedTags = splitMsgs.filter((item) => item.charAt(0) === '#');
       setTags(updatedTags);
-  console.log(updatedTags)
+  
       if (updatedTags.length === 0) {
         setProgress(50);
         try {
@@ -61,6 +61,7 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
             setProgress(0);
             setBarks([data, ...barks]);
             setMessage('');
+            
           } else {
             alert(data.errors);
           }
