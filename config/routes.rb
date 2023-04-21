@@ -15,7 +15,7 @@ get '/users', to: "users#index"
   get "/home", to: "users#show"
   delete '/users/', to: "users#destroy"
   delete "/logout", to: "sessions#destroy"
-get '/alpha', to: "posts#alpha"
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

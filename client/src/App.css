@@ -18,7 +18,7 @@
    width: 10px;
 }
 .App-header {
-  background-color: #282c34;
+  background-color: transparent;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
   animation: spin 2s linear infinite;
 }
 .top-load{
-  background-color: blue;
+  background-color: transparent;
   width: 15px;
   height: 15px;
 }
@@ -59,7 +59,7 @@
 }
 .sign {
   padding-top: 40px;
-  color: #4689d1;
+  color: #d15d46;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   font-size: 23px;
@@ -69,21 +69,7 @@
 .sc{   
   text-align: center;
   padding-top: 15px;}
-.submit {
-  cursor: pointer;
-    border-radius: 5em;
-    color: #fff;
-    background: linear-gradient(to right, #0f68c1, #21acd7);
-    border: 0;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    font-family: 'Ubuntu', sans-serif;
-    margin-left: 35%;
-    font-size: 13px;
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-}
+
 .lists{
   list-style-type: none;
   padding: 0;
@@ -101,14 +87,17 @@
 }
 .container{
   border: 2px solid #111010;
-  background-color: #f1f1f1;
+  background-color: transparent;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
 height: fit-content;
 opacity: 0;
-transition: all 2s;
+transition: all 0.5s;
 
+}
+.show{
+  opacity: 1;
 }
 .container::after {
   content: "";
@@ -116,12 +105,8 @@ transition: all 2s;
   display: table;
 }
 
-.show{
-  opacity: 1;
-}
-#stupid{
-  display: inline-block;
-}
+
+
 .reqList{
   list-style-type: none;
   padding: 0;
@@ -138,20 +123,23 @@ transition: all 2s;
   display: block; 
 }
 #logout{
+  cursor: pointer;
+  position: relative;
+  top:20px;
   border: none;
   background-color: transparent;
-  position: relative;
-  left: 900px;
+margin-left: 800px;
+  color: white;
 }
 .btn{
   width: fit-content;
 }
 #delete{
+  cursor: pointer;
   border: none;
   color: red;
   background-color: transparent;
-  position: relative;
-  left:1000px
+margin-left: 1000px;
 }
 
 .profilePic{
@@ -178,31 +166,10 @@ transition: all 2s;
   margin: 7em auto;
   border-radius: 1.5em;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-
+color: white;
 }
-.username{ width: 76%;
-  color:rgb(74, 140, 226);
-  text-align: center;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-  background-color:transparent;
 
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  outline: none;
-  box-sizing: border-box;
-  border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 50px;
-  margin-left: 46px;
-  text-align: center;
-  margin-bottom: 27px;
-  font-family: 'Ubuntu', sans-serif;}
-div.makes > mark{
-  color:rgb(47, 0, 255);
-background-color: #f1f1f1;
-}
+
 .editStuff{
   border: 2px solid #111010;
   width: fit-content;
@@ -211,8 +178,8 @@ background-color: #f1f1f1;
 
 }
 .gotAcc{
-  position: relative;
-  left: 100px;
+position: relative;
+left: 100px;
 }
 #appLogo{
   width: 50px;
@@ -230,30 +197,71 @@ top:50px;
   margin-left: 0px;
 }
 .bottom{
-
 bottom: 0px;
 position: fixed;
 
-
+}
+.homepage__pictures{
+  display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+}
+footer{
+  margin-left: 370px;
+}
+.makeBig{
+  transform: scale(1.20);
+}
+.editBtn{
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(to right, orange, red);
+  border: 0;
+  border-radius: 5em;
+}
+@media screen  and (max-width: 900px){
+  footer{
+    margin-left: 50px;
+  }
+#logout{
+  margin-left:300px;
+}
+#delete{
+margin-left: 400px;
+}
+}
+@media screen  and (max-width: 1100px){
+  footer{
+    margin-left: 150px;
+  }
+#logout{
+  margin-left:300px;
+}
+#delete{
+margin-left: 400px;
+}
+}
+@media screen  and (max-width: 700px){
+  footer{
+    margin-left: 50px;
+  }
+#logout{
+  margin-left:200px;
+}
+#delete{
+margin-left: 300px;
+}
 }
 .tag{
-  color: blue;
+  color: red;
 }
 body {
-  background-color: rgb(239, 206, 206);
+  background-color: rgb(0, 0, 0);
+  color: white;
 }
 
-.textBox{
-position: fixed;
 
-  bottom: 0px;
-  border: 2px solid #111010;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
-  
-}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

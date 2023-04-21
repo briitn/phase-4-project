@@ -2,6 +2,8 @@ import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory} from "react-router-dom"
 import PICTURES from "./pictures"
+import Input from "./styles/Input"
+import Button from "./styles/Button"
 function Create({setProgress}){
 
     
@@ -60,35 +62,31 @@ function Create({setProgress}){
 
     return (
         <div className='fox'>
-            <span><em id="appName">TextChat</em>
-            <img src="/chat.jpeg" id='appLogo' alt="app logo"/></span>
-            <p className="sign">Create Account</p>
-        <form onSubmit={changeSubmit} className="form">
-              <FormField>
-           
-              <input type='text'
-              name="username"
-               className="username"
-               placeholder="username*"
-              value={newUsername}
-              onChange={changeUser}
-              />
-              </FormField>
-              <FormField>
-         
-              <input type='password'
-              name="password"
-               className="username"
-               placeholder="password*"
-              value={password}
-              onChange={changePass}/>
-       </FormField>
-          <button type="submit" className="submit" >Submit</button>
-           </form> 
-           <span className="gotAcc" ><p>Already have an account?<a href="/">Sign in</a></p>
-         {loading?<div>'Creating account... please wait' </div>:<div></div>}</span> 
+        <p className="sign">Create Account</p>
+    <form onSubmit={changeSubmit} className="form">
+          <FormField>
+       
+          <Input type='text'
+          name="username"
+           placeholder="username*"
+          value={newUsername}
+          onChange={changeUser}
+          />
+          </FormField>
+          <FormField>
      
-        </div>
+          <Input type='password'
+          name="password"
+           placeholder="password*"
+          value={password}
+          onChange={changePass}/>
+   </FormField>
+      <Button>Submit</Button>
+       </form> 
+       <span className="gotAcc" ><p>Already have an account?<a href="/">Sign in</a></p>
+     {loading?<div>'Creating account... please wait' </div>:<div></div>}</span> 
+ 
+    </div>
       
     )
 }

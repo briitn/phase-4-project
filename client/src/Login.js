@@ -1,6 +1,8 @@
 import { useState } from "react"
 import FormField from "./styles/FormField"
 import { useHistory } from "react-router-dom"
+import Input from "./styles/Input"
+import Button from "./styles/Button"
 function Login({setUserStuff, setProgress}){
 
     const history= useHistory()
@@ -61,36 +63,33 @@ function Login({setUserStuff, setProgress}){
     return (
         
         <div className='fox'>
-            <span><em id="appName">TextChat</em>
-            <img src="/chat.jpeg" id='appLogo' alt="app logo"/></span>
-       <p className="sign" align="center">Sign in</p>
-        <form onSubmit={changeSubmit} className="form">
-            <FormField>
-            
-            <input type='text'
-            name="username"
-            placeholder="Username"
-            className="username"
-            value={username}
-            onChange={changeUser}
-            />
-            </FormField>
-            <FormField>
+        <p className="sign" align="center">Sign in</p>
+         <form onSubmit={changeSubmit} className="form">
+             <FormField>
+             
+             <Input type='text'
+             name="username"
+             placeholder="Username"
+             value={username}
+             onChange={changeUser}
+             />
+             </FormField>
+             <FormField>
+       
+             <Input type='text'
+             name="password"
+           
+              placeholder="Password"
+             value={password}
+             onChange={changePass}/>
+      </FormField>
+            {loading?<Button>Signing you in...</Button>:<Button>
+             Sign in</Button>}
+             <p  className='sc'> <a  href='./create'>Create an account</a> </p>
+            </form> 
       
-            <input type='text'
-            name="password"
-            className="username"
-             placeholder="Password"
-            value={password}
-            onChange={changePass}/>
-     </FormField>
-           {loading?<button className="submit">Signing you in...</button>:<button className="submit" >
-            Sign in</button>}
-            <p  className='sc'> <a  href='./create'>Create an account</a> </p>
-           </form> 
-     
-      
-        </div>
+       
+         </div>
       
     )
 }

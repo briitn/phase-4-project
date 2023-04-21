@@ -1,9 +1,8 @@
 
 import {Fragment, useEffect, useState} from 'react'
-import Hashtags from 'react-highlight-hashtags';
-import TopLoadingBar from 'react-top-loading-bar';
+import Button from './styles/Button';
 
-
+import Input from './styles/Input';
 
 import { useHistory } from 'react-router-dom'
  import CreateBarks from './CreateBarks'
@@ -19,17 +18,19 @@ const [hideButton, setHideButton]= useState('')
 const history=useHistory()
 
 useEffect(() => {
-
+fetch('/posts')
+.then(r=>r.json())
+.then(r=>{setBarks(r)})
     const interval = setInterval(async () => {
       const response = await fetch('/posts');
       const data = await response.json();
       setBarks(data);
   
-    }, 2000); // fetch new posts every 2 seconds
+    }, 1000);
 
 
   return () => clearInterval(interval);
-  }, []);
+  }, [userStuff]);
   
 
 
@@ -61,7 +62,7 @@ function changeUserstuff(e){
     });
 }
 
-console.log(barks)
+
  
 useEffect(()=>{
     if (newUserName.trim() || profilePic.trim() ){
@@ -77,25 +78,25 @@ useEffect(()=>{
    
         return(
             <div key={item.id}>
-                <img className='profilePic'src={item.image_url}
-                alt='userImage'/>
-               <button          onClick={(e)=>{setEditProfile(true)}}>Edit Profile</button>
+              <div><img className='profilePic'src={item.image_url}
+                alt='userImage'/></div>
+                    <button className='editBtn' onClick={(e)=>{setEditProfile(true)}}>Edit Profile</button>
                {editProfile?<div>
                 <button onClick={()=>{setEditProfile(false)}}>x</button>
                 <form onSubmit={changeUserstuff} className='editStuff'>
                 
-                    <div>
+                    <div >
                 <span>New Profile Picture:</span>
-                
-              {PICTURES.map(item=>{
-                return (<li onClick={(e)=>{setProfilePic(item)
-                e.target.style.transform='scale(1.20'}} key={Math.random()}>
-              <img src={item} className='profilePic'/>
-              </li>)})}
+                <div className='homepage__pictures' >  {PICTURES.map(item=>{
+                return (
+              <img src={item} className='profilePic' onClick={(e)=>{setProfilePic(item)
+                e.target.style.transform='scale(1.20'}} key={Math.random()} />
+              )})}</div>
+             
                 </div>
                 <div>
-                <span> New Username:  </span>
                  <input type='text'
+                 placeholder='New username'
                 value={newUserName}
                 onChange={(e)=>
                 {setNewUserName(e.target.value)}}/>
@@ -124,15 +125,13 @@ useEffect(()=>{
            
                 })
             })
-               .then(res=>{
-                setProgress(100)
-                res.json()})
-               .then(res=>{
-           setProgress(0)
-           setPostArray(res)
-           history.push('/HandleHashtags')
-           ; 
-           });
+            .then(r=>r.json())
+            .then(r=>{
+             setProgress(0)
+             setPostArray(r)
+            history.push('/HandleHashtags')
+             ; 
+           })
           
               
            
@@ -140,8 +139,6 @@ useEffect(()=>{
           };
           
           const mapBarks = barks?.map((item) => {
-console.log(item.bark)
-          
             return (
               <div key={item.id} className="container">
   <img
@@ -149,17 +146,17 @@ console.log(item.bark)
     alt="userImage"
     className="profilePic"
   />
-  <b>{item.user.username}</b>
+  <b   style={{ cursor:'pointer'}}>{item.user.username}</b>
   <div className="makes">
     {item.bark.split(/\s+/).map((text, index) => {
       if (text.startsWith("#")) {
-        console.log(item.bark)
+      
         return (
-          <div id='stupid'>
+          <div>
           <span
             key={`${item.id}-${index}`}
             className="hashtag"
-            style={{color:'blue'}}
+            style={{color:'blue', cursor:'pointer'}}
             onClick={() => handleHashtagClick(text)}
           >
             <em></em>
@@ -194,9 +191,7 @@ console.log(item.bark)
        <Fragment>
      
         <header>
-        <span>
-            <img src="/chat.jpeg" id='appLogoHome' alt="app logo"/></span>
-<button id='logout' onClick={(e)=>{
+<span><button id='logout' onClick={(e)=>{
    
     if (window.confirm("Are you sure you want to logout?")){
     fetch("/logout",
@@ -204,23 +199,24 @@ console.log(item.bark)
         method: "DELETE"
     })
    history.push('/')}
-}}>Logout</button>
+}}>Logout</button><button id='delete'onClick={(e)=>{
+  if( window.confirm("Are you sure you want to delete your account?")){
+   fetch(`users/`,
+   {
+       method: "DELETE"
+   })
+  history.push('/')}
+}}>Delete Account</button></span>
 
-  <button id='delete'onClick={(e)=>{
-   if( window.confirm("Are you sure you want to delete your account?")){
-    fetch(`users/`,
-    {
-        method: "DELETE"
-    })
-   history.push('/')}
-}}>Delete Account</button>
+ <span></span> 
     </header>
         {mapUserStuff}
-       <footer className='box'>
+     
+       <section className='box'>
        {mapBarks}
-     <CreateBarks  barks={barks} setBarks={setBarks} userId={id}  setProgress={setProgress} />
-   </footer>
-
+     
+   </section>
+<footer>   <CreateBarks  barks={barks} setBarks={setBarks} userId={id}  setProgress={setProgress}/>  </footer>
        </Fragment>
     )
 
