@@ -1,6 +1,6 @@
 # Phase-4-project
 ## Description
-This is a chat app that anyone can log in and type a message that will be shown to other users. My chat app has severaal tables that all have a relationship and work together to interact with the database and make my app run. I have a users table that has many posts, which has many post_hashtags(the join table). Through this, each post can have many hashtags and each hashtag can have many posts through the join table. With these relations set up, I can get all the info i need to make my app run.
+This is a pseudo social meadia app that anyone can log in and make a post(like a tweet, hence "barks") that will be shown to other users. My chat app has several tables that all have a relationship and work together to interact with the database and make my app run. I have a users table that has many posts, which has many post_hashtags(the join table). Through this, each post can have many hashtags and each hashtag can have many posts through the join table. With these relations set up, I can get all the info i need to make my app run.
 
 ## Getting started
 Before getting started i generated all the resources I needed via rails generate, then setup the tables and relationships i needed. For this app I used react js for my frontend and ruby on rails for the backend.  My frontend will need to send request to the backend and use the responses, which will be users information, posts and hashtags, and renders all of that via the react components.

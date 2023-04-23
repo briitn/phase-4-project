@@ -138,7 +138,7 @@ useEffect(()=>{
 
           };
           
-          const mapBarks = barks?.map((item) => {
+      const mapBarks = barks?.map((item) => {
             return (
               <div key={item.id} className="container">
   <img
@@ -152,7 +152,7 @@ useEffect(()=>{
       if (text.startsWith("#")) {
       
         return (
-          <div>
+          <>
           <span
             key={`${item.id}-${index}`}
             className="hashtag"
@@ -161,11 +161,9 @@ useEffect(()=>{
           >
             <em></em>
             {text}
-          </span><em>&#160;</em></div>
+          </span><em>&#160;</em></>
         );
       } else {
-  
-        
         return <span key={`${item.id}-${index}`} className='noTag'>{text} <em>  </em></span>;
       }
     })}
@@ -216,7 +214,7 @@ useEffect(()=>{
        {mapBarks}
      
    </section>
-<footer>   <CreateBarks  barks={barks} setBarks={setBarks} userId={id}  setProgress={setProgress}/>  </footer>
+   <CreateBarks  barks={barks} setBarks={setBarks} userId={id}  setProgress={setProgress}/> 
        </Fragment>
     )
 

@@ -76,7 +76,7 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
 
 
   return (
-    <div>
+    <div className="textbox">
       <Textbox>
         {" "}
         <textarea
