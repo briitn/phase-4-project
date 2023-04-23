@@ -215,6 +215,7 @@ useEffect(()=>{
      
    </section>
    <CreateBarks  barks={barks} setBarks={setBarks} userId={id}  setProgress={setProgress}/> 
+   <p>lol</p>
        </Fragment>
     )
 
