@@ -14,7 +14,7 @@ function CreateBarks({ barks, setBarks, userId, setProgress }) {
 
     splitMsgs.map((item) => {
       if (item.charAt(0) === "#") {
-        tags.push(item);
+     return   tags.push(item);
       }
     });
 
